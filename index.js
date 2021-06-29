@@ -23,6 +23,24 @@ mongoose.connect("mongodb://localhost/placesAPI", {
 
 const PlacesController = require("./controller/placesController");
 
+app.get("/places/:slug", async(req,res)=>{
+    try{
+        let {slug } = req.params;
+        let PlacesData = await PlacesController.getPlacesBySlug(slug)
+        if(PlacesData.status){
+            res.status(200).send(PlacesData.result)
+        }
+        else{
+            res.status(400).send(JlacesData.result);
+        }
+    }
+    catch(e){
+        console.log(e.messege);
+        res.status(400).send(e.messege);
+    }
+});
+
+
 app.get("/places",async(req,res)=>{
     try{
         let PlacesData = await PlacesController.getPlaces();
@@ -39,6 +57,7 @@ app.get("/places",async(req,res)=>{
         res.status(400).send(e.messege);
     }
 })
+
 
 app.post("/places",async(req,res)=>{
     try{
