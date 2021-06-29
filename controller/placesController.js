@@ -28,9 +28,9 @@ const getPlaces = async()=>{
 }
 
 
-const getPlacesByName = async(name)=>{
+const getPlacesBySlug = async(slug)=>{
     try{
-        let places = await Places.findOne({name});
+        let places = await Places.findOne({slug:slug});
         console.log(places);
         return {status:true, result:places}
     }catch(e){
@@ -44,5 +44,5 @@ const getPlacesByName = async(name)=>{
 module.exports = {
     createNewPlace,
     getPlaces,
-    getPlacesByName
+    getPlacesBySlug
 }
